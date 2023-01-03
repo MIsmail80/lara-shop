@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>LaraShop - @yield('title')</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('dashboard/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -42,7 +42,8 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                @include('dashboard.index')
+                {{-- @include('dashboard.index') --}}
+                @yield('content')
                 <!-- /.container-fluid -->
 
             </div>
