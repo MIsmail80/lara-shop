@@ -9,6 +9,6 @@ Route::get('/', function () {
 
 Route::get('/login', function () {
     return view('dashboard.login');
-});
+})->name('login');
 
 Route::resource('/categories', CategoryController::class);

@@ -9,8 +9,7 @@ Categories
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Categories</h1>
 
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-        <i class="fas fa-download fa-sm text-white-50"></i>
+    <a href="{{ url('/admin/categories/create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
         New Category
     </a>
 </div>
@@ -36,30 +35,40 @@ Categories
 
                 <tbody>
 
+                    @if($cats->isNotEmpty())
                     @foreach ($cats as $category)
-
                     <tr>
                         <td>
                             {{ $category->name }}
                         </td>
                         <td>
-                            <img src="{{ $category->photo }}" />
+                            <img src="{{ asset($category->photo) }}" style="width: 200px;" />
                         </td>
                         <td>
                             <i class="fas fa-{{ $category->icon }}"></i>
                         </td>
                         <td>
-                            <a href="" class="btn btn-warning">
+                            <a href="{{ url("admin/categories/$category->id/edit") }}" class="btn btn-warning">
                                 Edit
                             </a>
 
-                            <a href="" class="btn btn-danger">
-                                Delete
-                            </a>
+                            <form action="{{ url('/admin/categories/' . $category->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
-
                     @endforeach
+                    @else
+                    <tr>
+                        <td colspan="4">
+                            <div class="alert alert-danger" role="alert">
+                                No Data Found!
+                            </div>
+                        </td>
+                    </tr>
+                    @endif
 
                 </tbody>
             </table>
