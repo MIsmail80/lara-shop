@@ -17,8 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories =Category::paginate(7) ;
-        return view('dashboard.categories.index' ,compact('categories'));
+        $categories = Category::paginate(7);
+        return view('dashboard.categories.index', compact('categories'));
     }
 
     /**
@@ -41,23 +41,23 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['Required' , 'String'],
-            'photo' => ['required' ],
-            'icon' => ['required' ],
+            'name' => ['Required', 'String'],
+            'photo' => ['required'],
+            'icon' => ['required'],
         ]);
 
-        $filename=now()->timestamp . '_' . $request->file('photo')->getClientOriginalName();
-        $filePath="uploads/" . $filename ;
-        $request->file('photo')->move('uploads' ,$filename);
+        $filename = now()->timestamp . '_' . $request->file('photo')->getClientOriginalName();
+        $filePath = "uploads/" . $filename;
+        $request->file('photo')->move('uploads', $filename);
 
         Category::create([
-            'name' => $request->name ,
-            'photo' => $filePath ,
-            'icon' => $request->icon ,
+            'name' => $request->name,
+            'photo' => $filePath,
+            'icon' => $request->icon,
         ]);
 
         return redirect()->route('admin.categories.create')
-        ->with('success', 'category has been saved successfully');
+            ->with('success', 'category has been saved successfully');
     }
 
     /**
@@ -68,7 +68,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('dashboard.categories.show', compact('category') );
+        return view('dashboard.categories.show', compact('category'));
     }
 
     /**
@@ -79,8 +79,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('dashboard.categories.edit', compact('category') );
-
+        return view('dashboard.categories.edit', compact('category'));
     }
 
     /**
@@ -93,15 +92,15 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => ['Required' , 'String'],
-            'icon' => ['required' ],
+            'name' => ['Required', 'String'],
+            'icon' => ['required'],
         ]);
 
-        // if($request->hasFile('photo')){
-            $filename=now()->timestamp . '_' . $request->file('photo')->getClientOriginalName();
-            $filePath="uploads/" . $filename ;
-            $request->file('photo')->move('uploads' ,$filename);
-        // }
+        if ($request->hasFile('photo')) {
+            $filename = now()->timestamp . '_' . $request->file('photo')->getClientOriginalName();
+            $filePath = "uploads/" . $filename;
+            $request->file('photo')->move('uploads', $filename);
+        }
 
         $category = Category::findOrfail($id);
         $category->name = $request->name;
@@ -118,8 +117,8 @@ class CategoryController extends Controller
         //     'icon' => $request->icon ,
         // ]);
 
-        return redirect()->route('admin.categories.edit',$category->id)
-        ->with('success', 'category has been updated successfully');
+        return redirect()->route('admin.categories.edit', $category->id)
+            ->with('success', 'category has been updated successfully');
     }
 
     /**
@@ -132,6 +131,6 @@ class CategoryController extends Controller
     {
         $category->delete();
         return redirect()->route('admin.categories.index')
-                        ->with('success','Category deleted successfully');
+            ->with('success', 'Category deleted successfully');
     }
 }

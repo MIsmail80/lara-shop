@@ -14,7 +14,7 @@
         </a>
     </div>
 
-    <form action="{{ route('admin.categories.update', $category->id) }}" method="POST">
+    <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="card shadow mb-4">
