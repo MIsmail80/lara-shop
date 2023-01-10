@@ -48,11 +48,15 @@ class CategoryController extends Controller
         $filePath = "uploads/" . $filename;
         $request->file('photo')->move('uploads', $filename);
 
-        $newCategory = new Category();
+        /* $newCategory = new Category();
         $newCategory->name = $request->name;
         $newCategory->icon = $request->icon;
         $newCategory->photo = $filePath;
-        $newCategory->save();
+        $newCategory->save(); */
+
+        $inputs = $request->all();
+        $inputs['photo'] = $filePath;
+        $newCategory = Category::create($inputs);
 
         return back()->with('success', 'Category has been saved successfully.');
     }
@@ -63,9 +67,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view('dashboard.category.show', compact('category'));
     }
 
     /**
@@ -88,7 +92,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
         $request->validate([
             'name' => 'required',
@@ -101,15 +105,13 @@ class CategoryController extends Controller
             $request->file('photo')->move('uploads', $filename);
         }
 
-        $category = Category::find($id);
-        $category->name = $request->name;
-        $category->icon = $request->icon;
+        $inputs = $request->all();
 
         if ($request->hasFile('photo')) {
-            $category->photo = $filePath;
+            $inputs['photo'] = $filePath;
         }
 
-        $category->save();
+        $category->update($inputs);
 
         return back()->with('success', 'Category has been updated successfully.');
     }

@@ -27,6 +27,15 @@
             <span>Categories</span></a>
     </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url('/admin/products') }}">
+            <i class="fas fa-fw fa-archive"></i>
+            <span>Products</span></a>
+    </li>
+
     <!-- Heading -->
     {{-- <div class="sidebar-heading">
         Interface

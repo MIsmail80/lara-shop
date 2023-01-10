@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
 
 Route::get('/', function () {
@@ -12,3 +13,4 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::resource('/categories', CategoryController::class);
+Route::resource('/products', ProductController::class);
