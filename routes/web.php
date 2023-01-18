@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Website\HomepageController;
 
-Route::get('/', function () {
-    return view('website.home');
-});
+Route::get('/', HomepageController::class);
 
 Route::get('/category', function () {
     return view('website.category');

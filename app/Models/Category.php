@@ -14,4 +14,10 @@ class Category extends Model
         'icon',
         'photo',
     ];
+
+    // Relations
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

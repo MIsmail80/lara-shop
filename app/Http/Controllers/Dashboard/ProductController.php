@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::with(['category'])->paginate(10);
 
         return view('dashboard.products.index', compact('products'));
     }
@@ -48,8 +49,22 @@ class ProductController extends Controller
         ]);
 
         $inputs = $request->all();
-        $inputs['sku'] = rand(1000, 9999);
+        $inputs['sku'] = '';
         $newProduct = Product::create($inputs);
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $filename = now()->timestamp . '_' . $photo->getClientOriginalName();
+                $filePath = "uploads/products/" . $filename;
+                $photo->move('uploads/products', $filename);
+
+                Photo::create([
+                    'name' => $filename,
+                    'path' => $filePath,
+                    'product_id' => $newProduct->id,
+                ]);
+            }
+        }
 
         return back()->with('success', 'The prodsuct has been saved.');
     }
@@ -60,9 +75,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        $product->load(['category', 'photos']);
+
+        return view('dashboard.products.show', compact('product'));
     }
 
     /**

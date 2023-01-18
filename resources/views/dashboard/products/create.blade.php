@@ -76,6 +76,17 @@
                     @enderror
                 </div>
 
+                <div class="form-group">
+                    <label>Photos</label>
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" name="photos[]" multiple>
+                        <label class="custom-file-label">Choose file...</label>
+                    </div>
+                    @error('photo')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Save</button>

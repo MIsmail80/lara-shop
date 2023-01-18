@@ -1,7 +1,7 @@
 @extends('dashboard.layout')
 
 @section('title')
-Products
+    Products
 @endsection
 
 @section('content')
@@ -27,6 +27,7 @@ Products
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Category</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -41,9 +42,12 @@ Products
                                     </td>
 
                                     <td>
+                                        {{ $product->category->name }}
+                                    </td>
+
+                                    <td>
                                         <form action="{{ url('/admin/products/' . $product->id) }}" method="POST">
-                                            <a href="{{ url("admin/products/$product->id") }}"
-                                                class="btn btn-sm btn-info">
+                                            <a href="{{ url("admin/products/$product->id") }}" class="btn btn-sm btn-info">
                                                 View
                                             </a>
 
