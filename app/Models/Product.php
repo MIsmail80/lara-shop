@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
@@ -17,6 +18,26 @@ class Product extends Model
         'sku',
         'category_id',
     ];
+
+    protected $appends = ['featured_photo'];
+
+    protected function featuredPhoto(): Attribute
+    {
+        return new Attribute(
+            get: function () {
+                return $this->photos()->first()
+                    ? asset($this->photos()->first()->path)
+                    : asset('uploads/products/image-placeholder-base.png');
+            },
+        );
+    }
+
+    protected function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => "SAR $value",
+        );
+    }
 
     // Events
     protected static function booted()

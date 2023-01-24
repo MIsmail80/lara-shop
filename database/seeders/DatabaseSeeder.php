@@ -16,10 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Category::truncate();
+        // Category::truncate();
 
         $this->call([
             CategorySeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }

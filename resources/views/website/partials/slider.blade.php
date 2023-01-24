@@ -10,7 +10,7 @@
 
                                 @foreach ($cats as $category)
                                     <li class="has_child">
-                                        <a href="#!">
+                                        <a href="{{ url('/category/' . $category->id) }}">
                                             <span class="icon">
                                                 <i class="fas fa-{{ $category->icon }}"></i>
                                             </span>
