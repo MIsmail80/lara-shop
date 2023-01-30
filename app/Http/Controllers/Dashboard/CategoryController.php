@@ -50,11 +50,9 @@ class CategoryController extends Controller
         $filePath = "uploads/" . $filename;
         $request->file('photo')->move('uploads', $filename);
 
-        Category::create([
-            'name' => $request->name,
-            'photo' => $filePath,
-            'icon' => $request->icon,
-        ]);
+        $inputs = $request->all();
+        $inputs['photo'] = $filePath ;
+        Category::create($inputs);
 
         return redirect()->route('admin.categories.create')
             ->with('success', 'category has been saved successfully');
@@ -89,7 +87,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
         $request->validate([
             'name' => ['Required', 'String'],
@@ -102,20 +100,13 @@ class CategoryController extends Controller
             $request->file('photo')->move('uploads', $filename);
         }
 
-        $category = Category::findOrfail($id);
-        $category->name = $request->name;
-        $category->icon = $request->icon;
+        $inputs = $request->all();
 
         if ($request->hasFile('photo')) {
-            $category->photo = $filePath;
+            $inputs['photo'] = $filePath ;
         }
-        $category->save();
 
-        // $category->update([
-        //     'name' => $request->name ,
-        //     'photo' => $filePath ,
-        //     'icon' => $request->icon ,
-        // ]);
+        $category->update($inputs);
 
         return redirect()->route('admin.categories.edit', $category->id)
             ->with('success', 'category has been updated successfully');
@@ -130,6 +121,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category deleted successfully');
     }

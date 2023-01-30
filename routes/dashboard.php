@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,13 @@ Route::group([
         return view('dashboard.index');
     })->name('dashboard');
 
+        // category route
     Route::resource('/categories' , CategoryController::class);
+
+        // category route
+    Route::resource('/brands' , BrandController::class);
+
+
 
 });
 
