@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,10 +20,11 @@ Route::group([
         // category route
     Route::resource('/categories' , CategoryController::class);
 
-        // category route
+        // Brand route
     Route::resource('/brands' , BrandController::class);
 
-
+        // Product route
+    Route::resource('/products' , ProductController::class);
 
 });
 

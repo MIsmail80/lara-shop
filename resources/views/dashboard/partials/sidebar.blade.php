@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{route('admin.dashboard')}}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -23,21 +23,30 @@
 
     <!-- Nav Item - Categories -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{route('admin.categories.index')}}">
+        <a class="nav-link" href="{{ route('admin.categories.index') }}">
             <i class="fas fa-fw fa-bars"></i>
             <span>Categories</span></a>
     </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
-        <!-- Nav Item - Brsnds-->
-        <li class="nav-item active">
-            <a class="nav-link" href="{{route('admin.brands.index')}}">
-                <i class="fas fa-fw fa-bars"></i>
-                <span>Brands</span></a>
-        </li>
+    <!-- Nav Item - Brsnds-->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('admin.brands.index') }}">
+            <i class="fas fa-fw fa-bars"></i>
+            <span>Brands</span></a>
+    </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Nav Item - Product-->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('admin.products.index') }}">
+            <i class="fas fa-fw fa-bars"></i>
+            <span>Products</span></a>
+    </li>
 
 
     {{-- <!-- Sidebar Toggler (Sidebar) -->
