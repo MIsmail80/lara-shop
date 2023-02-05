@@ -44,17 +44,21 @@
                         <div class="sports_product_item">
                             <div class="item_image" data-bg-color="#f5f5f5">
 
-                                <img
-                                    src="{{ $product->featured_photo }}" />
+                                <img src="{{ $product->featured_photo }}" />
 
                                 <ul class="product_action_btns ul_li_center clearfix">
-                                    <li><a href="#!"><i class="fal fa-search"></i></a></li>
-                                    <li><a href="#!"><i class="fas fa-shopping-cart"></i></a></li>
+                                    <li>
+                                        <a href="{{ url('/product/' . $product->id) }}" style="width: 150px;">
+                                            <i class="fal fa-eye"></i>
+                                            Details
+                                        </a>
+                                    </li>
+                                    {{-- <li><a href="#!"><i class="fas fa-shopping-cart"></i></a></li> --}}
                                 </ul>
-                                <ul class="product_label ul_li text-uppercase clearfix">
+                                {{-- <ul class="product_label ul_li text-uppercase clearfix">
                                     <li class="bg_sports_red">50% Off</li>
                                     <li class="bg_sports_red">Sale</li>
-                                </ul>
+                                </ul> --}}
                             </div>
                             <div class="item_content text-uppercase text-white">
                                 <h3 class="item_title bg_black text-white mb-0">
