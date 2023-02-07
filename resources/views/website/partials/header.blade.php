@@ -52,28 +52,43 @@
                     <div class="supermarket_header_btns clearfix">
                         <ul class="action_btns_group ul_li_right clearfix">
                             <li>
-                                <button type="button">
-                                    <span>Need</span>
-                                    <strong>Help?</strong>
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button">
-                                    <span>Your</span>
-                                    <strong>Account</strong>
-                                </button>
-                            </li>
-                            <li>
                                 <button type="button" class="cart_btn">
                                     <i class="fal fa-shopping-bag"></i>
                                     <span class="btn_badge">2</span>
                                 </button>
                             </li>
+
+                            @if (Auth::check())
+                                <li>
+                                    <a>
+                                        Welcome back, {{ Auth::user()->name }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('profile') }}" class="btn btn-secondry btn-sm">
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('logout') }}" class="btn btn-secondry btn-sm">
+                                        Sign out
+                                    </a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="{{ url('register') }}" class="btn btn-secondry btn-sm">
+                                        New Account
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('login') }}" class="btn btn-secondry btn-sm">
+                                        Sign in
+                                    </a>
+                                </li>
+                            @endif
+
+
                         </ul>
-                        <span class="alart_text float-right">
-                            <small>£</small>
-                            New here? Get your Coupons!
-                        </span>
                     </div>
                 </div>
             </div>
