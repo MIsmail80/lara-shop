@@ -1,15 +1,25 @@
 <?php
 
+use App\Http\Controllers\Website\CategoriesController;
+use App\Http\Controllers\Website\HomepageController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('website.home');
-});
+// home route
 
-Route::get('categories', function () {
-    return view('website.categories');
-});
+Route::group([
+    'prefix' => '/',
+    'as' => 'website.'
 
-Route::get('/product', function () {
-    return view('website.product');
+], function () {
+
+    Route::get('/', HomepageController::class)
+        ->name('home');
+
+    //categories route
+    Route::get('categories/{id}', [CategoriesController::class , 'index'])->name('categories');
+
+    Route::get('/product', function () {
+        return view('website.product');
+    })->name('products');
+
 });
