@@ -19,7 +19,7 @@
                             <li>
                                 <button type="button" class="cart_btn">
                                     <i class="fal fa-shopping-cart"></i>
-                                    <span class="btn_badge">2</span>
+                                    <span class="btn_badge">0</span>
                                 </button>
                             </li>
                             <li><button type="button" class="mobile_menu_btn"><i class="far fa-bars"></i></button>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     <form action="#">
                         <div class="medical_search_bar">
                             <div class="form_item">
@@ -50,44 +50,50 @@
 
                 <div class="col-lg-3">
                     <div class="supermarket_header_btns clearfix">
-                        <ul class="action_btns_group ul_li_right clearfix">
-                            <li>
-                                <button type="button" class="cart_btn">
-                                    <i class="fal fa-shopping-bag"></i>
-                                    <span class="btn_badge">2</span>
-                                </button>
-                            </li>
+                        <ul class="action_btns_group ul_li_right justify-content-center clearfix">
 
                             @if (Auth::check())
-                                <li>
-                                    <a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                        data-toggle="dropdown" aria-expanded="false">
                                         Welcome back, {{ Auth::user()->name }}
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('profile') }}" class="btn btn-secondry btn-sm">
-                                        Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('logout') }}" class="btn btn-secondry btn-sm">
-                                        Sign out
-                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a href="{{ url('profile') }}" class="dropdown-item">
+                                            Profile
+                                        </a>
+                                        <a href="{{ url('logout') }}" class="dropdown-item">
+                                            Sign out
+                                        </a>
+                                    </div>
                                 </li>
                             @else
                                 <li>
-                                    <a href="{{ url('register') }}" class="btn btn-secondry btn-sm">
+                                    <a href="{{ url('register') }}" class="btn btn-danger btn-sm">
                                         New Account
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('login') }}" class="btn btn-secondry btn-sm">
+                                    <a href="{{ url('login') }}" class="btn btn-danger btn-sm">
                                         Sign in
                                     </a>
                                 </li>
                             @endif
 
 
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-1">
+                    <div class="supermarket_header_btns clearfix">
+                        <ul class="action_btns_group ul_li_right clearfix">
+                            <li>
+                                <a href="{{ Auth::check() ? url('cart') : url('login') }}" class="cart_btn">
+                                    <i class="fal fa-shopping-bag"></i>
+                                    <span class="btn_badge">0</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
