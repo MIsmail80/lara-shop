@@ -35,7 +35,7 @@ class Product extends Model
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => "SAR $value",
+            get: fn ($value) => $value,
         );
     }
 
@@ -57,5 +57,10 @@ class Product extends Model
     public function photos()
     {
         return $this->hasMany(Photo::class);
+    }
+
+    public function cart()
+    {
+        return $this->belongsToMany(Cart::class);
     }
 }

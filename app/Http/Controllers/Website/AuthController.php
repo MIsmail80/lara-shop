@@ -26,6 +26,7 @@ class AuthController extends Controller
         $newUser = User::create($request->all());
 
         if($newUser){
+            $newUser->cart()->create();
             return redirect('login');
         }
     }

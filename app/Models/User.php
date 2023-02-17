@@ -53,4 +53,10 @@ class User extends Authenticatable
             set: fn ($value) => Hash::make($value),
         );
     }
+
+    // Relations
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
 }

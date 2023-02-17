@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\AuthController;
+use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\ProductController;
 use App\Http\Controllers\Website\CategoryController;
 use App\Http\Controllers\Website\HomepageController;
@@ -20,6 +21,5 @@ Route::post('/login', [AuthController::class, 'postLogin']);
 
 Route::get('/logout', [AuthController::class, 'logout']);
 
-Route::get('/add-to-cart', function(){
-    return '<h1>Done</h1>';
-});
+Route::get('/cart', [CartController::Class, 'index']);
+Route::post('/add-to-cart', [CartController::Class, 'addToCart']);

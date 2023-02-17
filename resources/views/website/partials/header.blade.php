@@ -19,7 +19,9 @@
                             <li>
                                 <button type="button" class="cart_btn">
                                     <i class="fal fa-shopping-cart"></i>
-                                    <span class="btn_badge">0</span>
+                                    <span class="btn_badge">
+                                        {{ $cartCount }}
+                                    </span>
                                 </button>
                             </li>
                             <li><button type="button" class="mobile_menu_btn"><i class="far fa-bars"></i></button>
@@ -91,7 +93,9 @@
                             <li>
                                 <a href="{{ Auth::check() ? url('cart') : url('login') }}" class="cart_btn">
                                     <i class="fal fa-shopping-bag"></i>
-                                    <span class="btn_badge">0</span>
+                                    <span class="btn_badge">
+                                        {{ $cartCount }}
+                                    </span>
                                 </a>
                             </li>
                         </ul>
