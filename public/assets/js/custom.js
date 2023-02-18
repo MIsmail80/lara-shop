@@ -1176,6 +1176,7 @@
   // google map - end
   // --------------------------------------------------
 
+  // Add to cart
   $('#add-to-cart-form').submit(function (e) {
     e.preventDefault();
 
@@ -1185,11 +1186,13 @@
       data: $(this).serializeArray(),
       success: function (data) {
 
-        increaseCartCount(1);
+        if (! data.exists) {
+          increaseCartCount(1);
+        }
 
         $.toaster({
           priority: 'success',
-          message: data,
+          message: data.msg,
           'timeout': 3000,
         });
       },
@@ -1203,6 +1206,45 @@
     let cartCount = parseInt($('.btn_badge').first().text());
     cartCount += increament;
     $('.btn_badge').text(cartCount);
+  }
+
+  // Remove from cart
+  $('.remove_btn').click(function () {
+    // let productID = $(this).attr('data-pid');
+    let productID = $(this).data('pid');
+    let totalPrice = parseFloat($(this).parents('tr').find('.total_price').text());
+
+    $.ajax({
+      url: '/remove-from-cart/' + productID,
+      method: 'GET',
+      success: (data) => {
+
+        calcTotals(totalPrice);
+
+        $(this).parents('tr').fadeOut(2000, function () {
+          $(this).remove();
+        });
+
+        $.toaster({
+          priority: 'success',
+          message: data,
+          'timeout': 3000,
+        });
+      },
+      error: function (data) {
+
+      },
+    });
+  });
+
+  function calcTotals(amount) {
+    let subTotal = parseFloat($('#subtotal').text()) - amount;
+    let newVat = subTotal * 15 / 100;
+    let newTotal = subTotal + newVat;
+
+    $('#subtotal').text(subTotal);
+    $('#vat').text(newVat);
+    $('#total').text(newTotal);
   }
 
 })(jQuery);

@@ -23,3 +23,5 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/cart', [CartController::Class, 'index']);
 Route::post('/add-to-cart', [CartController::Class, 'addToCart']);
+Route::get('/remove-from-cart/{productId}', [CartController::Class, 'removeFromCart']);
+Route::post('/update-cart', [CartController::Class, 'update']);
