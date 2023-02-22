@@ -115,7 +115,9 @@
                                 <span id="total">{{ $subtotal + $vat }}</span>
                             </li>
                         </ul>
-                        <a href="shop_checkout.html" class="custom_btn bg_success">Proceed to Checkout</a>
+                        <a href="{{ url('/checkout') }}" class="custom_btn bg_success">
+                            Proceed to Checkout
+                        </a>
                     </div>
                 </div>
             </div>
