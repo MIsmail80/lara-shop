@@ -15,4 +15,14 @@ class ProductController extends Controller
 
         return view('website.product', compact('product'));
     }
+
+    public function review()
+    {
+        auth()->user()->ratings()->attach(
+            request()->product_id,
+            request()->only(['rating', 'comment'])
+        );
+
+        return back()->with('success', 'Thanks for your review.');
+    }
 }

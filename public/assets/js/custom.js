@@ -1186,7 +1186,7 @@
       data: $(this).serializeArray(),
       success: function (data) {
 
-        if (! data.exists) {
+        if (!data.exists) {
           increaseCartCount(1);
         }
 
@@ -1246,5 +1246,12 @@
     $('#vat').text(newVat);
     $('#total').text(newTotal);
   }
+
+  $(".my-rating").starRating({
+    starSize: 25,
+    callback: function (currentRating, $el) {
+      $('#rating').val(currentRating);
+    }
+  });
 
 })(jQuery);

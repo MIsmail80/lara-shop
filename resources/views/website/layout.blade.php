@@ -22,6 +22,8 @@
 	<!-- nice select - css include -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/nice-select.css') }}">
 
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/star-rating-svg.css') }}">
+
 	<!-- carousel - css include -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/slick.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/slick-theme.css') }}">
@@ -99,6 +101,8 @@
 
 	<!-- popup images & videos - jquery include -->
 	<script src="{{ asset('assets/js/magnific-popup.min.js') }}"></script>
+
+	<script src="{{ asset('assets/js/jquery.star-rating-svg.js') }}"></script>
 
 	<!-- filtering & masonry layout - jquery include -->
 	<script src="{{ asset('assets/js/isotope.pkgd.min.js') }}"></script>

@@ -4,7 +4,19 @@
     <!-- details_section - start ================================================== -->
     <section class="details_section shop_details sec_ptb_140 clearfix">
         <div class="container">
+
+            <div class="row">
+                @if (session('success'))
+                    <div class="col">
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                @endif
+            </div>
+
             <div class="row mb_100 justify-content-lg-between justify-content-md-center">
+
                 <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <div class="shop_details_image">
                         <div class="tab-content zoom-gallery">
@@ -42,13 +54,14 @@
                         </span>
                         <hr>
 
-                        {{-- <div class="row mb_30 align-items-center justify-content-lg-between">
+                        <div class="row mb_30 align-items-center justify-content-lg-between">
                             <div class="col-lg-5">
                                 <div class="item_brand d-flex align-items-center">
                                     <span class="brand_title">Brands:</span>
                                     <span class="brand_image d-flex align-items-center justify-content-center"
                                         data-bg-color="#f7f7f7">
-                                        <img src="assets/images/product_brands/img_01.png" alt="image_not_found">
+                                        <img src="{{ asset('assets/images/product_brands/img_01.png') }}"
+                                            alt="image_not_found">
                                     </span>
                                 </div>
                             </div>
@@ -63,10 +76,9 @@
                                         <li><i class="fas fa-star"></i></li>
                                     </ul>
                                     <span>4 Review(s)</span>
-                                    <button type="button" class="add_review_btn">Add Your Review</button>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
                         <p class="mb-0">
                             {{ Str::words($product->description, 25) }}
@@ -166,33 +178,32 @@
                     </div>
 
                     <div id="reviews_tab" class="tab-pane fade">
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <div class="form_item">
-                                        <input type="text" name="name" placeholder="Your Name">
+                        @if (auth()->check())
+                            <form action="{{ url('/product/review') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="my-rating"></div>
+                                        <input type="hidden" name="rating" id="rating">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <div class="form_item">
-                                        <input type="email" name="email" placeholder="Your Email">
-                                    </div>
+                                <div class="form_item mt-4">
+                                    <textarea name="comment" placeholder="Your Message"></textarea>
                                 </div>
 
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="form_item">
-                                        <input type="text" name="subject" placeholder="Subject">
-                                    </div>
-                                </div>
+                                <button type="submit" class="custom_btn bg_default_red text-uppercase">Submit
+                                    Review
+                                </button>
+                            </form>
+                        @else
+                            <div class="alert alert-danger">
+                                Please, login to your account first.
+                                <a href="{{ url('login') }}" class="btn btn-primary">Login</a>
                             </div>
+                        @endif
 
-                            <div class="form_item">
-                                <textarea name="message" placeholder="Your Message"></textarea>
-                            </div>
-                            <button type="submit" class="custom_btn bg_default_red text-uppercase">Submit
-                                Review</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -203,5 +214,5 @@
         </div>
     </section>
     <!-- details_section - end
-                                                                  ================================================== -->
+                                                                                                              ================================================== -->
 @endsection
