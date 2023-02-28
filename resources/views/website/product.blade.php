@@ -68,14 +68,19 @@
 
                             <div class="col-lg-7">
                                 <div class="rating_review_wrap d-flex align-items-center clearfix">
-                                    <ul class="rating_star ul_li">
+                                    {{-- <ul class="rating_star ul_li">
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <span>4 Review(s)</span>
+                                    </ul> --}}
+
+                                    <div class="p-rating"></div>
+
+                                    <span>
+                                        {{ $product->comments_count }} Review(s)
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -178,6 +183,28 @@
                     </div>
 
                     <div id="reviews_tab" class="tab-pane fade">
+
+                        @foreach ($product->comments as $user)
+                            {{-- @if (!empty($user->pivot->comment)) --}}
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    {{ $user->name }}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {{ $user->pivot->comment }}
+                                    </p>
+                                </div>
+                            </div>
+                            {{-- @endif --}}
+                        @endforeach
+
+                        <hr />
+
+                        <h5 class="mb-4">
+                            Please, leave your comment.
+                        </h5>
+
                         @if (auth()->check())
                             <form action="{{ url('/product/review') }}" method="POST">
                                 @csrf
@@ -213,6 +240,17 @@
             @include('website.partials.popular_products')
         </div>
     </section>
-    <!-- details_section - end
-                                                                                                              ================================================== -->
+    <!-- details_section - end================================================== -->
+@endsection
+
+@section('js')
+    <script>
+        $(function() {
+            $(".p-rating").starRating({
+                starSize: 15,
+                readOnly: true,
+                initialRating: {{ $rating }},
+            });
+        });
+    </script>
 @endsection

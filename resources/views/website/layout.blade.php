@@ -117,6 +117,8 @@
 	<!-- custom - jquery include -->
 	<script src="{{ asset('assets/js/custom.js') }}"></script>
 
+	@yield('js')
+
 </body>
 
 </html>
