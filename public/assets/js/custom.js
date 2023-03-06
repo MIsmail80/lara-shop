@@ -6,21 +6,21 @@
 // ==================================================
 
 
-(function($) {
+(function ($) {
   "use strict";
 
 
   // back to top - start
   // --------------------------------------------------
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     if ($(this).scrollTop() > 200) {
       $('.backtotop:hidden').stop(true, true).fadeIn();
     } else {
       $('.backtotop').stop(true, true).fadeOut();
     }
   });
-  $(function() {
-    $(".scroll").on('click', function() {
+  $(function () {
+    $(".scroll").on('click', function () {
       $("html,body").animate({
         scrollTop: $("#thetop").offset().top
       }, "slow");
@@ -42,7 +42,7 @@
 
   // search box - start
   // --------------------------------------------------
-  $('.search_btn').on('click', function() {
+  $('.search_btn').on('click', function () {
     $('.search_btn > .fa-search').toggleClass('fa-times');
   });
   // search box - end
@@ -58,9 +58,9 @@
   $("[data-bg-color]").each(function () {
     $(this).css("background", $(this).attr("data-bg-color"))
   });
-  
-  $('[data-background]').each(function() {
-    $(this).css('background-image', 'url('+ $(this).attr('data-background') + ')');
+
+  $('[data-background]').each(function () {
+    $(this).css('background-image', 'url(' + $(this).attr('data-background') + ')');
   });
   // background - end
   // --------------------------------------------------
@@ -109,13 +109,13 @@
 
   // 3rd level dropdown menu
   $('.dropdown > a').addClass('dropdown-toggle');
-  $('.dropdown-menu .dropdown > a').on('click', function(e) {
+  $('.dropdown-menu .dropdown > a').on('click', function (e) {
     if (!$(this).next().hasClass('show')) {
       $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
     }
     var $subMenu = $(this).next(".dropdown-menu");
     $subMenu.toggleClass('show');
-    $(this).parents('li.dropdown.show').on('.dropdown', function(e) {
+    $(this).parents('li.dropdown.show').on('.dropdown', function (e) {
       $('.dropdown-menu > .dropdown .show').removeClass("show");
     });
     $('.dropdown-menu li a.dropdown-toggle').removeClass("show_dropdown");
@@ -131,10 +131,10 @@
       $('.overlay').removeClass('active');
     });
 
-    $('.cart_btn').on('click', function () {
+    /* $('.cart_btn').on('click', function () {
       $('.cart_sidebar').addClass('active');
       $('.overlay').addClass('active');
-    });
+    }); */
   });
 
   $(document).ready(function () {
@@ -164,10 +164,10 @@
 
   // multy count down - start
   // --------------------------------------------------
-  $('.countdown_timer').each(function(){
-    $('[data-countdown]').each(function() {
+  $('.countdown_timer').each(function () {
+    $('[data-countdown]').each(function () {
       var $this = $(this), finalDate = $(this).data('countdown');
-      $this.countdown(finalDate, function(event) {
+      $this.countdown(finalDate, function (event) {
         var $this = $(this).html(event.strftime(''
           + '<li class="days_count"><strong>%D</strong><span>Days</span></li>'
           + '<li class="hours_count"><strong>%H</strong><span>Hours</span></li>'
@@ -190,8 +190,8 @@
     mainClass: 'mfp-with-zoom mfp-img-mobile',
     image: {
       verticalFit: true,
-      titleSrc: function(item) {
-        return item.el.attr('title') + ' &middot; <a class="image-source-link" href="'+item.el.attr('data-source')+'" target="_blank">image source</a>';
+      titleSrc: function (item) {
+        return item.el.attr('title') + ' &middot; <a class="image-source-link" href="' + item.el.attr('data-source') + '" target="_blank">image source</a>';
       }
     },
     gallery: {
@@ -200,7 +200,7 @@
     zoom: {
       enabled: true,
       duration: 300,
-      opener: function(element) {
+      opener: function (element) {
         return element.find('img');
       }
     }
@@ -233,12 +233,12 @@
 
   // masoney grid layout - start
   // --------------------------------------------------
-  var $grid = $('.grid').imagesLoaded( function() {
+  var $grid = $('.grid').imagesLoaded(function () {
     $grid.masonry({
       itemSelector: '.grid-item',
       percentPosition: true,
       columnWidth: '.grid-sizer'
-    }); 
+    });
   });
   // masoney grid layout - end
   // --------------------------------------------------
@@ -285,16 +285,16 @@
   // isotope filtering - end
   // --------------------------------------------------
 
-  
+
   // quantity - start
   // --------------------------------------------------
-  
-  function neoncart_quantity(){
+
+  function neoncart_quantity() {
     $(document).on('click', '.quantity_input .input_number_decrement, .quantity_input .input_number_increment', function (e) {
       var target = $(e.target),
-      qty = target.closest('.quantity_input').find('input.input_number'),
-      min, max, step, value;
-      
+        qty = target.closest('.quantity_input').find('input.input_number'),
+        min, max, step, value;
+
       if (qty.length) {
         min = qty.attr('min') || 0;
         max = qty.attr('max') || 0;
@@ -303,26 +303,26 @@
         max = parseInt(max);
         step = parseInt(step);
         value = parseInt(qty.val());
-        
+
         if (target.is('.input_number_increment')) {
           value += step;
         } else {
           value -= step;
         }
-        
+
         value = Math.max(min, value);
         if (max) {
           value = Math.min(max, value);
         }
-        
+
         qty.val(value).change();
       }
     });
-}
+  }
   neoncart_quantity();
   // quantity - end
   // --------------------------------------------------
-  
+
   // zoom
   $('.zoom-image img').click(function (event) {
     var ix = $(this).offset().left;
@@ -367,18 +367,18 @@
   });
   // price range - start
   // --------------------------------------------------
-  if($("#slider-range").length){
-    $( "#slider-range" ).slider({
+  if ($("#slider-range").length) {
+    $("#slider-range").slider({
       range: true,
       min: 5,
       max: 1000,
-      values: [ 30.00, 429.00 ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+      values: [30.00, 429.00],
+      slide: function (event, ui) {
+        $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
       }
     });
-    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+      " - $" + $("#slider-range").slider("values", 1));
   }
 
   $('.ar_top').on('click', function () {
@@ -386,9 +386,9 @@
     var result = document.getElementById(getID);
     var qty = result.value;
     $('.proceed_to_checkout .update-cart').removeAttr('disabled');
-    if( !isNaN( qty ) ) {
+    if (!isNaN(qty)) {
       result.value++;
-    }else{
+    } else {
       return false;
     }
   });
@@ -423,18 +423,18 @@
     prevArrow: ".ss2_left_arrow",
     nextArrow: ".ss2_right_arrow",
     responsive: [
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 1
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2
+        }
       }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 2
-      }
-    }
     ]
   });
 
@@ -450,36 +450,36 @@
     prevArrow: ".ss3_left_arrow",
     nextArrow: ".ss3_right_arrow",
     responsive: [
-    {
-      breakpoint: 0,
-      settings: {
-        slidesToShow: 1
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 551,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3
+        }
       }
-    },
-    {
-      breakpoint: 551,
-      settings: {
-        slidesToShow: 1
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 2
-      }
-    },
-    {
-      breakpoint: 992,
-      settings: {
-        slidesToShow: 2
-      }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 3
-      }
-    }
     ]
   });
 
@@ -495,36 +495,36 @@
     prevArrow: ".ss4_left_arrow",
     nextArrow: ".ss4_right_arrow",
     responsive: [
-    {
-      breakpoint: 0,
-      settings: {
-        slidesToShow: 1
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 681,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4
+        }
       }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1
-      }
-    },
-    {
-      breakpoint: 681,
-      settings: {
-        slidesToShow: 2
-      }
-    },
-    {
-      breakpoint: 992,
-      settings: {
-        slidesToShow: 3
-      }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 4
-      }
-    }
     ]
   });
 
@@ -540,36 +540,36 @@
     prevArrow: ".left_arrow5",
     nextArrow: ".right_arrow5",
     responsive: [
-    {
-      breakpoint: 0,
-      settings: {
-        slidesToShow: 1
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 681,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 881,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4
+        }
       }
-    },
-    {
-      breakpoint: 576,
-      settings: {
-        slidesToShow: 1
-      }
-    },
-    {
-      breakpoint: 681,
-      settings: {
-        slidesToShow: 2
-      }
-    },
-    {
-      breakpoint: 881,
-      settings: {
-        slidesToShow: 3
-      }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 4
-      }
-    }
     ]
   });
   // common carousel - end
@@ -592,8 +592,8 @@
     nextArrow: ".main_right_arrow",
     customPaging: function (slider, i) {
       console.log(slider);
-      var slideNumber   = (i + 1),
-      totalSlides = slider.slideCount;
+      var slideNumber = (i + 1),
+        totalSlides = slider.slideCount;
       return '<a class="custom-dot" role="button" title="' + slideNumber + ' of ' + totalSlides + '"><span class="string">' + slideNumber + '</span></a>';
     }
   });
@@ -803,30 +803,30 @@
     focusOnSelect: true,
     asNavFor: '.pd_slide',
     responsive: [
-    {
-      breakpoint: 0,
-      settings: {
-        slidesToShow: 2
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 5
+        }
       }
-    },
-    {
-      breakpoint: 576,
-      settings: {
-        slidesToShow: 2,
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 3
-      }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 5
-      }
-    }
     ]
   });
   // product details slider - end
@@ -845,52 +845,52 @@
     pauseOnHover: true,
     autoplaySpeed: 4000,
     responsive: [
-    {
-      breakpoint: 0,
-      settings: {
-        slidesToShow: 1
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 380,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          centerPadding: '40px',
+        }
+      },
+      {
+        breakpoint: 451,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          centerPadding: '60px',
+        }
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 5
+        }
       }
-    },
-    {
-      breakpoint: 380,
-      settings: {
-        slidesToShow: 1,
-        centerMode: true,
-        centerPadding: '40px',
-      }
-    },
-    {
-      breakpoint: 451,
-      settings: {
-        slidesToShow: 1,
-        centerMode: true,
-        centerPadding: '60px',
-      }
-    },
-    {
-      breakpoint: 576,
-      settings: {
-        slidesToShow: 2
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 3
-      }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 4
-      }
-    },
-    {
-      breakpoint: 1280,
-      settings: {
-        slidesToShow: 5
-      }
-    }
     ]
   });
   // category slider - end
@@ -909,36 +909,36 @@
     pauseOnHover: true,
     autoplaySpeed: 3000,
     responsive: [
-    {
-      breakpoint: 0,
-      settings: {
-        slidesToShow: 2
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 481,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 6
+        }
       }
-    },
-    {
-      breakpoint: 481,
-      settings: {
-        slidesToShow: 2
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 3
-      }
-    },
-    {
-      breakpoint: 992,
-      settings: {
-        slidesToShow: 4
-      }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 6
-      }
-    }
     ]
   });
   // barnd carousel - end
@@ -973,36 +973,36 @@
     pauseOnHover: true,
     autoplaySpeed: 2000,
     responsive: [
-    {
-      breakpoint: 0,
-      settings: {
-        slidesToShow: 1
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 501,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 680,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3
+        }
       }
-    },
-    {
-      breakpoint: 501,
-      settings: {
-        slidesToShow: 1
-      }
-    },
-    {
-      breakpoint: 680,
-      settings: {
-        slidesToShow: 2
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 3
-      }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 3
-      }
-    }
     ]
   });
 
@@ -1016,36 +1016,36 @@
     pauseOnHover: true,
     autoplaySpeed: 2000,
     responsive: [
-    {
-      breakpoint: 0,
-      settings: {
-        slidesToShow: 1
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 681,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4
+        }
       }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1
-      }
-    },
-    {
-      breakpoint: 681,
-      settings: {
-        slidesToShow: 2
-      }
-    },
-    {
-      breakpoint: 992,
-      settings: {
-        slidesToShow: 3
-      }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 4
-      }
-    }
     ]
   });
   // product 3 collumn - end
@@ -1100,42 +1100,42 @@
     prevArrow: ".ggc_left_arrow",
     nextArrow: ".ggc_right_arrow",
     responsive: [
-    {
-      breakpoint: 0,
-      settings: {
-        slidesToShow: 1
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 481,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4
+        }
       }
-    },
-    {
-      breakpoint: 481,
-      settings: {
-        slidesToShow: 1
-      }
-    },
-    {
-      breakpoint: 576,
-      settings: {
-        slidesToShow: 2
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 3
-      }
-    },
-    {
-      breakpoint: 992,
-      settings: {
-        slidesToShow: 3
-      }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 4
-      }
-    }
     ]
   });
   // gadget gallery carousel - end
@@ -1144,7 +1144,7 @@
 
   // google map - start
   // --------------------------------------------------
-  if ( $('#mapBox').length ){
+  if ($('#mapBox').length) {
     var $lat = $('#mapBox').data('lat');
     var $lon = $('#mapBox').data('lon');
     var $zoom = $('#mapBox').data('zoom');
@@ -1167,7 +1167,7 @@
     map.addMarker({
       lat: $markerLat,
       lng: $markerLon,
-      icon: $marker,    
+      icon: $marker,
       infoWindow: {
         content: $info
       }
@@ -1176,5 +1176,82 @@
   // google map - end
   // --------------------------------------------------
 
+  // Add to cart
+  $('#add-to-cart-form').submit(function (e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: '/add-to-cart',
+      method: 'POST',
+      data: $(this).serializeArray(),
+      success: function (data) {
+
+        if (!data.exists) {
+          increaseCartCount(1);
+        }
+
+        $.toaster({
+          priority: 'success',
+          message: data.msg,
+          'timeout': 3000,
+        });
+      },
+      error: function (data) {
+
+      },
+    });
+  });
+
+  function increaseCartCount(increament) {
+    let cartCount = parseInt($('.btn_badge').first().text());
+    cartCount += increament;
+    $('.btn_badge').text(cartCount);
+  }
+
+  // Remove from cart
+  $('.remove_btn').click(function () {
+    // let productID = $(this).attr('data-pid');
+    let productID = $(this).data('pid');
+    let totalPrice = parseFloat($(this).parents('tr').find('.total_price').text());
+
+    $.ajax({
+      url: '/remove-from-cart/' + productID,
+      method: 'GET',
+      success: (data) => {
+
+        calcTotals(totalPrice);
+
+        $(this).parents('tr').fadeOut(2000, function () {
+          $(this).remove();
+        });
+
+        $.toaster({
+          priority: 'success',
+          message: data,
+          'timeout': 3000,
+        });
+      },
+      error: function (data) {
+
+      },
+    });
+  });
+
+  function calcTotals(amount) {
+    let subTotal = parseFloat($('#subtotal').text()) - amount;
+    let newVat = subTotal * 15 / 100;
+    let newTotal = subTotal + newVat;
+
+    $('#subtotal').text(subTotal);
+    $('#vat').text(newVat);
+    $('#total').text(newTotal);
+  }
+
+  $(".my-rating").starRating({
+    starSize: 25,
+    callback: function (currentRating, $el) {
+      $('#rating').val(currentRating);
+    }
+  });
 
 })(jQuery);
