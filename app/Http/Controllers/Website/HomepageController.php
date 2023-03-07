@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,6 +16,14 @@ class HomepageController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('website.home');
+        $products = Product::with('photos')->orderBy('sales', 'desc')->limit(6)->get();
+
+        $computersProducts = Product::with('photos')
+                                    ->where('category_id', 1)
+                                    ->orderBy('sales', 'desc')
+                                    ->limit(6)
+                                    ->get();
+
+        return view('website.home', compact('products', 'computersProducts'));
     }
 }

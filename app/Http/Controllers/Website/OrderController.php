@@ -20,6 +20,8 @@ class OrderController extends Controller
         $subtotal = 0;
         $products = [];
         foreach($cart as $product){
+            $product->increment('sales');
+
             $productTotal = $product->price * $product->pivot->quantity;
             $subtotal += $productTotal;
 
