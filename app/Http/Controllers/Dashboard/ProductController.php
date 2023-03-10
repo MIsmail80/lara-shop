@@ -88,9 +88,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        $cats = Category::get();
+
+        $product->load(['photos']);
+
+        return view('dashboard.products.edit', compact('product', 'cats'));
     }
 
     /**
@@ -100,9 +104,33 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        $inputs = $request->all();
+
+        $product->update($inputs);
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $filename = now()->timestamp . '_' . $photo->getClientOriginalName();
+                $filePath = "uploads/products/" . $filename;
+                $photo->move('uploads/products', $filename);
+
+                Photo::create([
+                    'name' => $filename,
+                    'path' => $filePath,
+                    'product_id' => $product->id,
+                ]);
+            }
+        }
+
+        return back()->with('success', 'The product has been updated.');
     }
 
     /**
@@ -114,5 +142,12 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delImage($id)
+    {
+        Photo::destroy($id);
+
+        return back()->with('success', 'The photo has been deleted.');
     }
 }

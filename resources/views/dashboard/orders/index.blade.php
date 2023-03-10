@@ -78,7 +78,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                     </div>
                 </form>

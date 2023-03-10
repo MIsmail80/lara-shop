@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\DealController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\ProductController;
@@ -14,7 +15,10 @@ Route::get('/login', function () {
     return view('dashboard.login');
 })->name('login');
 
+Route::get('/products/del-image/{id}', [ProductController::class, 'delImage']);
+
 Route::resource('/categories', CategoryController::class);
 Route::resource('/products', ProductController::class);
 Route::resource('/customers', UserController::class);
 Route::resource('/orders', OrderController::class);
+Route::resource('/deals', DealController::class);

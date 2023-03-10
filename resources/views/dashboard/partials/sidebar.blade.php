@@ -54,6 +54,15 @@
             <span>Orders</span></a>
     </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url('/admin/deals') }}">
+            <i class="fas fa-fw fa-truck"></i>
+            <span>Flash Deals</span></a>
+    </li>
+
     <!-- Heading -->
     {{-- <div class="sidebar-heading">
         Interface

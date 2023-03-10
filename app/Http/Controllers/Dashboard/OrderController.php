@@ -10,8 +10,6 @@ class OrderController extends Controller
 {
     public function index()
     {
-        dump(request()->all());
-
         $orders = Order::with('user');
 
         if(request()->status){

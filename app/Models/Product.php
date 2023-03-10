@@ -68,4 +68,9 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class)->withPivot(['rating', 'comment']);
     }
+
+    public function deals()
+    {
+        return $this->hasMany(Deal::class);
+    }
 }
