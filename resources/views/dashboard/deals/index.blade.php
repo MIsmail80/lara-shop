@@ -30,6 +30,7 @@
                             <th>Product</th>
                             <th>Discount</th>
                             <th>Duration</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -40,16 +41,23 @@
                             @foreach ($deals as $deal)
                                 <tr>
                                     <td>
-                                        {{ $deals->name }}
+                                        {{ $deal->name }}
                                     </td>
                                     <td>
-                                        {{-- <form action="{{ url('/admin/categories/' . $category->id) }}" method="POST">
-                                            <a href="{{ url("admin/categories/$category->id") }}"
-                                                class="btn btn-sm btn-info">
-                                                View
-                                            </a>
-
-                                            <a href="{{ url("admin/categories/$category->id/edit") }}"
+                                        {{ $deal->product->name }}
+                                    </td>
+                                    <td>
+                                        {{ $deal->discount }} %
+                                    </td>
+                                    <td>
+                                        {{ $deal->duration }} hrs
+                                    </td>
+                                    <td>
+                                        {{ $deal->active ? 'active' : 'expired' }}
+                                    </td>
+                                    <td>
+                                        <form action="{{ url('/admin/deals/' . $deal->id) }}" method="POST">
+                                            <a href="{{ url("admin/deals/$deal->id/edit") }}"
                                                 class="btn btn-sm btn-warning">
                                                 Edit
                                             </a>
@@ -57,7 +65,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                        </form> --}}
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

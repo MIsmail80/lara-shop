@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Website;
 
+use App\Models\Deal;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,8 @@ class HomepageController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $deals = Deal::with('product')->where('active', 1)->get();
+
         $products = Product::with('photos')->orderBy('sales', 'desc')->limit(6)->get();
 
         $computersProducts = Product::with('photos')
@@ -24,6 +27,6 @@ class HomepageController extends Controller
                                     ->limit(6)
                                     ->get();
 
-        return view('website.home', compact('products', 'computersProducts'));
+        return view('website.home', compact('products', 'computersProducts', 'deals'));
     }
 }

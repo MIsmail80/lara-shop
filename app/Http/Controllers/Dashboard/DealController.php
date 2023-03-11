@@ -17,7 +17,7 @@ class DealController extends Controller
      */
     public function index()
     {
-        $deals = Deal::paginate(10);
+        $deals = Deal::with('product')->paginate(10);
 
         return view('dashboard.deals.index', compact('deals'));
     }
