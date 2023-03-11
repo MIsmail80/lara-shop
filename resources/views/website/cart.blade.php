@@ -61,6 +61,10 @@
                                     </td>
                                 </tr>
                                 @php($subtotal += $total)
+
+                                @if (isset($_GET['discount']))
+                                    @php($subtotal -= $_GET['discount'])
+                                @endif
                             @empty
                                 <tr>
                                     <td colspan="100%">
@@ -77,16 +81,7 @@
 
                 <div class="coupon_wrap mb_50">
                     <div class="row justify-content-lg-between">
-                        <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
-                            <div class="coupon_form">
-                                <div class="form_item mb-0">
-                                    <input type="text" class="coupon" placeholder="Coupon Code">
-                                </div>
-                                <button type="submit" class="custom_btn bg_danger text-uppercase">Apply Coupon</button>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col">
                             <div class="cart_update_btn">
                                 <button type="submit" class="custom_btn bg_secondary text-uppercase">
                                     Update Cart
@@ -96,6 +91,29 @@
                     </div>
                 </div>
             </form>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="coupon_form">
+                        @if (session('coupon_error'))
+                            <div class="alert alert-danger">
+                                {{ session('coupon_error') }}
+                            </div>
+                        @endif
+                        <form action="{{ url('/apply-coupon') }}" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{ $subtotal }}" name="total" />
+                            <div class="form_item mb-0">
+                                <input type="text" class="coupon" value="{{ $_GET['code'] ?? '' }}" name="code"
+                                    placeholder="Coupon Code">
+                            </div>
+                            <button type="submit" class="custom_btn bg_danger text-uppercase">
+                                Apply Coupon
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <div class="row justify-content-lg-end">
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">

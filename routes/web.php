@@ -37,6 +37,7 @@ Route::post('/add-to-cart', [CartController::Class, 'addToCart']);
 Route::get('/remove-from-cart/{productId}', [CartController::Class, 'removeFromCart']);
 Route::post('/update-cart', [CartController::Class, 'update']);
 
+Route::post('/apply-coupon', [OrderController::class, 'applyCoupon']);
 Route::get('/checkout', [OrderController::class, 'checkout']);
 Route::post('/create-order', [OrderController::class, 'store']);
 Route::get('/complete-order', [OrderController::class, 'completeOrder']);

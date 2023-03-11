@@ -29,6 +29,7 @@ class Order extends Model
         'vat',
         'total',
         'user_id',
+        'coupon_id',
     ];
 
     protected $appends = ['status_text', 'payment_method_text'];

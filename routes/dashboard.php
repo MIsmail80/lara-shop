@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DealController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\CouponController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
 
@@ -22,3 +23,4 @@ Route::resource('/products', ProductController::class);
 Route::resource('/customers', UserController::class);
 Route::resource('/orders', OrderController::class);
 Route::resource('/deals', DealController::class);
+Route::resource('/coupons', CouponController::class);
