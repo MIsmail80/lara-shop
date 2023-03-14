@@ -31,10 +31,10 @@
                 </div>
 
                 <div class="col-lg-5">
-                    <form action="#">
+                    <form action="{{ url('search-results') }}">
                         <div class="medical_search_bar">
                             <div class="form_item">
-                                <input type="search" name="search" placeholder="search here...">
+                                <input type="search" name="keyword" placeholder="search here...">
                             </div>
                             <div class="option_select mb-0">
                                 <select>

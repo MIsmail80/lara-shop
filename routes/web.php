@@ -13,6 +13,8 @@ Route::get('/', HomepageController::class);
 
 Route::get('/category/{id}', [CategoryController::class, 'show']);
 
+Route::get('/search-results', [ProductController::class, 'search']);
+
 Route::get('/product/{id}', [ProductController::class, 'show']);
 Route::post('/product/review', [ProductController::class, 'review']);
 

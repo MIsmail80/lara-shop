@@ -72,6 +72,15 @@
             <span>Coupons</span></a>
     </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url('/admin/slides') }}">
+            <i class="fas fa-fw fa-truck"></i>
+            <span>Slider</span></a>
+    </li>
+
     <!-- Heading -->
     {{-- <div class="sidebar-heading">
         Interface

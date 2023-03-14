@@ -35,4 +35,17 @@ class ProductController extends Controller
 
         return back()->with('success', 'Thanks for your review.');
     }
+
+    public function search()
+    {
+        $keyword = request()->keyword;
+
+        $products = Product::where('name', 'LIKE', "%$keyword%")
+                            ->orWhere('description', 'LIKE', "%$keyword%")
+                            ->orWhere('sku', 'LIKE', "%$keyword%")
+                            ->orWhere('price', 'LIKE', "%$keyword%")
+                            ->get();
+
+        return view('website.search_results', compact('products'));
+    }
 }

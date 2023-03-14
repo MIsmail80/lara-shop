@@ -27,73 +27,28 @@
 
             <div class="col-lg-9">
                 <div class="main_slider clearfix" data-slick='{"arrows": false}'>
-                    <div class="item clearfix" data-bg-color="#ffc156">
-                        <div class="slider_image order-last" data-animation="fadeInUp" data-delay=".2s">
-                            <img src="assets/images/slider/supermarket/img_01.png" alt="image_not_found">
-                        </div>
-                        <div class="slider_content">
-                            <h4 data-animation="fadeInUp" data-delay=".4s">sell to get what you love</h4>
-                            <h3 data-animation="fadeInUp" data-delay=".6s">The Gift you are Wishing</h3>
-                            <div class="item_price" data-animation="fadeInUp" data-delay=".8s">
-                                <small>From</small>
-                                <sup>£</sup>749<sup>99</sup>
-                            </div>
-                            <div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-                                <a href="#!" class="custom_btn btn_round bg_supermarket_red">Start Buying</a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="item clearfix" data-bg-color="#ffc156">
-                        <div class="slider_image order-last" data-animation="fadeInUp" data-delay=".2s">
-                            <img src="assets/images/slider/supermarket/img_01.png" alt="image_not_found">
-                        </div>
-                        <div class="slider_content">
-                            <h4 data-animation="fadeInUp" data-delay=".4s">sell to get what you love</h4>
-                            <h3 data-animation="fadeInUp" data-delay=".6s">The Gift you are Wishing</h3>
-                            <div class="item_price" data-animation="fadeInUp" data-delay=".8s">
-                                <small>From</small>
-                                <sup>£</sup>749<sup>99</sup>
+                    @foreach ($slides as $slide)
+                        <div class="item clearfix" data-bg-color="#ffc156">
+                            <div class="slider_image order-last" data-animation="fadeInUp" data-delay=".2s">
+                                <img src="{{ asset($slide->photo) }}" alt="image_not_found">
                             </div>
-                            <div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-                                <a href="#!" class="custom_btn btn_round bg_supermarket_red">Start Buying</a>
-                            </div>
-                        </div>
-                    </div>
+                            <div class="slider_content">
+                                {!! $slide->content !!}
 
-                    <div class="item clearfix" data-bg-color="#ffc156">
-                        <div class="slider_image order-last" data-animation="fadeInUp" data-delay=".2s">
-                            <img src="assets/images/slider/supermarket/img_01.png" alt="image_not_found">
-                        </div>
-                        <div class="slider_content">
-                            <h4 data-animation="fadeInUp" data-delay=".4s">sell to get what you love</h4>
-                            <h3 data-animation="fadeInUp" data-delay=".6s">The Gift you are Wishing</h3>
-                            <div class="item_price" data-animation="fadeInUp" data-delay=".8s">
-                                <small>From</small>
-                                <sup>£</sup>749<sup>99</sup>
-                            </div>
-                            <div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-                                <a href="#!" class="custom_btn btn_round bg_supermarket_red">Start Buying</a>
-                            </div>
-                        </div>
-                    </div>
+                                @if ($slide->product_id)
+                                    <div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
+                                        <a href="{{ url('product/' . $slide->product_id) }}"
+                                            class="custom_btn btn_round bg_supermarket_red">
+                                            Start Buying
+                                        </a>
+                                    </div>
+                                @endif
 
-                    <div class="item clearfix" data-bg-color="#ffc156">
-                        <div class="slider_image order-last" data-animation="fadeInUp" data-delay=".2s">
-                            <img src="assets/images/slider/supermarket/img_01.png" alt="image_not_found">
-                        </div>
-                        <div class="slider_content">
-                            <h4 data-animation="fadeInUp" data-delay=".4s">sell to get what you love</h4>
-                            <h3 data-animation="fadeInUp" data-delay=".6s">The Gift you are Wishing</h3>
-                            <div class="item_price" data-animation="fadeInUp" data-delay=".8s">
-                                <small>From</small>
-                                <sup>£</sup>749<sup>99</sup>
-                            </div>
-                            <div class="abtn_wrap clearfix" data-animation="fadeInUp" data-delay="1s">
-                                <a href="#!" class="custom_btn btn_round bg_supermarket_red">Start Buying</a>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
