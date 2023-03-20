@@ -34,15 +34,22 @@
                     <form action="{{ url('search-results') }}">
                         <div class="medical_search_bar">
                             <div class="form_item">
-                                <input type="search" name="keyword" placeholder="search here...">
+                                <input type="search" name="keyword" placeholder="search here..."
+                                    value="{{ $_GET['keyword'] ?? '' }}">
                             </div>
                             <div class="option_select mb-0">
-                                <select>
-                                    <option data-display="All Category">Select A Option</option>
-                                    <option value="1">Some option</option>
-                                    <option value="2">Another option</option>
-                                    <option value="3" disabled>A disabled option</option>
-                                    <option value="4">Potato</option>
+                                <select name="category_id">
+                                    <option data-display="All Category" value="">
+                                        Select A Option
+                                    </option>
+
+                                    @foreach ($cats as $category)
+                                        <option value="{{ $category->id }}"
+                                            {{ isset($_GET['category_id']) && $_GET['category_id'] == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+
                                 </select>
                             </div>
                             <button type="submit" class="submit_btn"><i class="fal fa-search"></i></button>

@@ -10,7 +10,7 @@
 
             <div class="row justify-content-center">
 
-                @foreach ($products as $product)
+                @forelse ($products as $product)
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="sports_product_item">
                             <div class="item_image" data-bg-color="#f5f5f5">
@@ -42,7 +42,13 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col">
+                        <div class="alert alert-info mt-5 text-center">
+                            No results found!
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>

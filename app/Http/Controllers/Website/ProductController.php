@@ -40,11 +40,22 @@ class ProductController extends Controller
     {
         $keyword = request()->keyword;
 
-        $products = Product::where('name', 'LIKE', "%$keyword%")
+        $products = Product::query();
+
+        if($keyword){
+            $products = $products->where(function($q) use($keyword){
+                return $q->where('name', 'LIKE', "%$keyword%")
                             ->orWhere('description', 'LIKE', "%$keyword%")
                             ->orWhere('sku', 'LIKE', "%$keyword%")
-                            ->orWhere('price', 'LIKE', "%$keyword%")
-                            ->get();
+                            ->orWhere('price', 'LIKE', "%$keyword%");
+            });
+        }
+
+        if(request()->category_id){
+            $products = $products->where('category_id', request()->category_id);
+        }
+
+        $products = $products->get();
 
         return view('website.search_results', compact('products'));
     }
